@@ -70,6 +70,15 @@
         "patternss": [],
         "size": 2,
         "weight": 20
+      },
+      {
+        "id": 3,
+        "name": "salamander",
+        "species": "SnappingTurtle",
+        "price": 2000,
+        "patternss": [],
+        "size": 4,
+        "weight": 20
       }
     ]
   }

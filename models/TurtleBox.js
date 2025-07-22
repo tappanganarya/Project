@@ -95,6 +95,52 @@ class TurtleBox {
         this.save(boxes);
     }
 
+    static countTotalPrice(params) {
+        let boxes = this.showBoxes();
+
+        const [boxName] = params;
+
+        boxes = boxes.find(box => box.boxName === boxName);
+
+        if (!boxes) {
+            console.log(`Not Found ${boxName}`);
+            return;
+        }
+
+        let totalPrice = boxes.turtles.reduce((sum, turtle) => {
+            return sum + Number(turtle.price);
+        }, 0);
+        console.log(`Total price of turtles in box "${boxName}": Rp ${totalPrice}`);
+    }
+
+    static boxDetail(params) {
+        let boxes = this.showBoxes();
+
+        const [boxName] = params;
+
+        let box = boxes.find(box => box.boxName === boxName);
+
+        if (!box) {
+            console.log(`${boxName} is not found`);
+            return;
+        }
+
+        console.log(`"${box.boxName}" turtles are:`);
+        box.turtles.forEach((turtle, index) => {
+            console.log(`${index + 1}. ${turtle.name} turtle - Rp.${turtle.price}`);
+            console.log(`Species: ${turtle.species}, Size: ${turtle.size}cm, Weight: ${turtle.weight}gr.  `);
+
+            if (turtle.patternss.length > 0) {
+                const patternsStr = turtle.patterns.join(', ').replace(/, ([^,]*)$/, ' and $1');
+                console.log(`Patterns: ${patternsStr}.`);
+            } else {
+                console.log(`Patterns: None. `);
+            }
+
+        });
+
+    }
+
     static save(turtles) {
         const turtleString = JSON.stringify(turtles, null, 2);
         fs.writeFileSync("./turtleboxes.json", turtleString);

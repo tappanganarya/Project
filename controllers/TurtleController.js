@@ -19,6 +19,14 @@ class Controller {
         TurtleBox.sellTurtle(params);
     }
 
+    static countTotalPrice(params) {
+        TurtleBox.countTotalPrice(params);
+    }
+
+    static boxDetail(params) {
+        TurtleBox.boxDetail(params);
+    }
+
     static message(msg) {
         console.log(msg);
     }

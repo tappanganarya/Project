@@ -16,6 +16,12 @@ switch (command) {
     case "sellTurtle":
         Controller.sellTurtle(params);
         break;
+    case "countPrice":
+        Controller.countTotalPrice(params);
+        break;
+    case "boxDetail":
+        Controller.boxDetail(params);
+        break;
     default:
         Controller.message("Command not found");
         break;
