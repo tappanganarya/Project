@@ -1,9 +1,103 @@
 const fs = require("fs");
+const { json } = require("stream/consumers");
+const { SnappingTurtle, Tortoise, Terrapins } = require("./Turtle");
 
 class TurtleBox {
+
+    constructor(id, boxName, turtles) {
+        this.id = id;
+        this.boxName = boxName;
+        this.turtles = turtles || [];
+    }
+
+
     static showBoxes() {
         const turtels = JSON.parse(fs.readFileSync("./turtleboxes.json", "utf8"));
         return turtels;
+    }
+
+    static createBox(params) {
+        let turtels = this.showBoxes();
+
+        const [boxName, turtles] = params;
+        let id = turtels.length ? turtels[turtels.length - 1].id + 1 : 1;
+
+
+        const existingBox = turtels.find(box => box.boxName === boxName);
+
+        if (existingBox) {
+            console.log("Name turtleBox cannot be the same");
+        } else {
+            turtels.push(new TurtleBox(id, boxName, turtles));
+            this.save(turtels);
+            console.log("New turtle box created.");
+        }
+    }
+
+    static addTurtle(params) {
+        let boxes = this.showBoxes();
+        const [boxName, name, species, price, size, weight, patternss] = params;
+
+        const box = boxes.find(boxes => boxes.boxName === boxName);
+
+        if (!box) {
+            console.log("Boxes not found");
+            return
+        }
+
+        const turtleId = box.turtles.length ? box.turtles[box.turtles.length - 1].id + 1 : 1;
+
+        let newTurtle;
+
+        switch (species) {
+            case "SnappingTurtle":
+                newTurtle = new SnappingTurtle(turtleId, name, +price, +size, +weight, patternss);
+                console.log(`Turtle ${name} added to box ${boxName}.`);
+                break;
+            case "Tortoise":
+                newTurtle = new Tortoise(turtleId, name, +price, +size, +weight, patternss);
+                console.log(`Turtle ${name} added to box ${boxName}.`);
+                break;
+            case "Terrapins":
+                newTurtle = new Terrapins(turtleId, name, +price, +size, +weight, patternss);
+                console.log(`Turtle ${name} added to box ${boxName}.`);
+                break;
+            default:
+                console.log(`Unknown species: ${species}`);
+                break;
+        }
+
+        box.turtles.push(newTurtle);
+        this.save(boxes);
+    }
+
+    static sellTurtle(params) {
+        let boxes = this.showBoxes();
+        const [boxName, idString] = params;
+
+        const id = Number(idString);
+
+        const box = boxes.find(b => b.boxName === boxName);
+        if (!box) {
+            console.log(`Box with name ${boxName} not found.`);
+            return;
+        }
+
+        const initialLength = box.turtles.length;
+        box.turtles = box.turtles.filter(t => t.id !== id);
+
+        if (box.turtles.length < initialLength) {
+            console.log(`Turtle with id ${id} has been sold from box ${boxName}.`);
+        } else {
+            console.log(`Turtle with id ${id} not found in box ${boxName}.`);
+        }
+
+        this.save(boxes);
+    }
+
+    static save(turtles) {
+        const turtleString = JSON.stringify(turtles, null, 2);
+        fs.writeFileSync("./turtleboxes.json", turtleString);
     }
 }
 

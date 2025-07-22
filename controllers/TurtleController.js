@@ -8,6 +8,16 @@ class Controller {
         let turtles = TurtleBox.showBoxes();
         TurtleView.show(turtles);
     }
+    static addBox(params) {
+        TurtleBox.createBox(params);
+    }
+
+    static addTurtle(params) {
+        TurtleBox.addTurtle(params);
+    }
+    static sellTurtle(params) {
+        TurtleBox.sellTurtle(params);
+    }
 
     static message(msg) {
         console.log(msg);

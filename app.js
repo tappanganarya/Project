@@ -7,6 +7,15 @@ switch (command) {
     case "show":
         Controller.show();
         break;
+    case "addBox":
+        Controller.addBox(params);
+        break;
+    case "addTurtle":
+        Controller.addTurtle(params);
+        break;
+    case "sellTurtle":
+        Controller.sellTurtle(params);
+        break;
     default:
         Controller.message("Command not found");
         break;

@@ -4,14 +4,14 @@ class Turtle {
         this.name = name;
         this.species = species;
         this.price = price;
-        this.patternss = patternss;
+        this.patternss = patternss || [];
     }
 
 }
 
 class SnappingTurtle extends Turtle {
-    constructor(id, name, price, patternss, size, weight) {
-        super(id, name, "SnappingTurtl", price, patternss, size, weight)
+    constructor(id, name, price, size, weight, patternss) {
+        super(id, name, "SnappingTurtle", price, patternss);
         this.size = size;
         this.weight = weight;
     }
@@ -19,8 +19,8 @@ class SnappingTurtle extends Turtle {
 }
 
 class Tortoise extends Turtle {
-    constructor(id, name, price, patternss, size, weight) {
-        super(id, name, "Tortoise", price, patternss, size, weight)
+    constructor(id, name, price, size, weight, patternss) {
+        super(id, name, "Tortoise", price, patternss)
         this.size = size;
         this.weight = weight;
     }
@@ -28,8 +28,8 @@ class Tortoise extends Turtle {
 }
 
 class Terrapins extends Turtle {
-    constructor(id, name, price, patternss, size, weight) {
-        super(id, name, "Terrapins", price, patternss, size, weight)
+    constructor(id, name, price, size, weight, patternss) {
+        super(id, name, "Terrapins", price, patternss)
         this.size = size;
         this.weight = weight;
     }
