@@ -141,6 +141,21 @@ class TurtleBox {
 
     }
 
+    static filterPerSpecies() {
+        let boxes = this.showBoxes();
+        let speciesSet = new Set();
+
+        boxes.forEach(box => {
+            box.turtles.forEach(b => {
+                speciesSet.add(b.species);
+            });
+        });
+        console.log(`Ada ${speciesSet.size} jenis species`);
+        [...speciesSet].forEach((species, index) => {
+            console.log(`${index + 1}. ${species}`);
+        });
+    };
+
     static save(turtles) {
         const turtleString = JSON.stringify(turtles, null, 2);
         fs.writeFileSync("./turtleboxes.json", turtleString);

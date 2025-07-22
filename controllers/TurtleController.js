@@ -27,6 +27,10 @@ class Controller {
         TurtleBox.boxDetail(params);
     }
 
+    static filterPerSpecies() {
+        TurtleBox.filterPerSpecies();
+    }
+
     static message(msg) {
         console.log(msg);
     }

@@ -22,6 +22,9 @@ switch (command) {
     case "boxDetail":
         Controller.boxDetail(params);
         break;
+    case "filterPerSpecies":
+        Controller.filterPerSpecies();
+        break;
     default:
         Controller.message("Command not found");
         break;
